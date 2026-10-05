@@ -189,22 +189,32 @@ GET /api/games/genre/RPG
 Java 환경에서 Gradle로 프로젝트를 빌드하고 실행하도록 만들었다.
 
 ## 15. 배포 과정
+개인 GitHub Repository를 Render에 연결했다.
 
+Docker 방식으로 배포했고 Dockerfile을 이용해서 실행했다.
+
+Dockerfile가 정상적으로 배포됐다.
 
 ## 16. 배포 테스트
 
+![10](capture/10.png)
+![11](capture/11.png)
+![12](capture/12.png)
+![13](capture/13.png)
+![14](capture/14.png)
+![15](capture/15.png)
 
 
 ## 17. URL
 
 Organization Repository
-
+https://github.com/2026-2-WebService/assign05-c01-22400401
 
 Personal Repository
+https://github.com/6heang-maker/assign05-c01-22400401
 
-
-Deploy URL
-
+배포 URL
+https://assign05-c01-22400401.onrender.com
 
 
 ## Key Learning
