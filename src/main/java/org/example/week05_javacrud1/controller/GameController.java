@@ -16,6 +16,7 @@ public class GameController {
     public GameController(GameService gameService) {
         this.gameService = gameService;
     }
+
     @PostMapping
     public ResponseEntity<GameResponse> create(@RequestBody GameRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -39,9 +40,15 @@ public class GameController {
 
         return gameService.update(id, request);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         gameService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/genre/{genre}")
+    public List<GameResponse> findByGenre(@PathVariable String genre) {
+        return gameService.findByGenre(genre);
     }
 }

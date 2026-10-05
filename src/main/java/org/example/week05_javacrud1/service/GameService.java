@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -74,6 +75,19 @@ public class GameService {
     public void delete(Long id) {
         findGame(id);
         repository.deleteById(id);
+    }
+
+    public List<GameResponse> findByGenre(String genre) {
+
+        List<GameResponse> result = new ArrayList<>();
+
+        for (Game g : repository.findAll()) {
+            if (g.getGenre().equals(genre)) {
+                result.add(toResponse(g));
+            }
+        }
+
+        return result;
     }
 
     private Game findGame(Long id) {
