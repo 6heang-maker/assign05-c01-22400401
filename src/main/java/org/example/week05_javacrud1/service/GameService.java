@@ -6,17 +6,27 @@ import org.example.week05_javacrud1.repository.GameRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 @Service
 public class GameService {
 
     private final GameRepository repository;
+
     public GameService(GameRepository repository) {
         this.repository = repository;
     }
 
     public GameResponse create(GameRequest r) {
+
+        if (r.price() < 0) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Price cannot be negative"
+            );
+        }
+
         return toResponse(
                 repository.save(
                         new Game(
@@ -37,11 +47,20 @@ public class GameService {
                 .map(this::toResponse)
                 .toList();
     }
+
     public GameResponse findById(Long id) {
         return toResponse(findGame(id));
     }
+
     public GameResponse update(Long id, GameRequest r) {
         Game g = findGame(id);
+
+        if (r.price() < 0) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Price cannot be negative"
+            );
+        }
 
         g.setTitle(r.title());
         g.setGenre(r.genre());
@@ -66,6 +85,7 @@ public class GameService {
                         )
                 );
     }
+
     private GameResponse toResponse(Game g) {
         return new GameResponse(
                 g.getId(),
